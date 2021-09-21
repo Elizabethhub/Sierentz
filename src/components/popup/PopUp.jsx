@@ -1,7 +1,7 @@
 import React from "react";
 import { PopUpStyled } from "./PopUpStyled";
 import PropTypes from "prop-types";
-import { Table } from "../Table";
+import Form, { Table } from "../Table";
 
 let browser = window;
 let popup = null;
@@ -10,26 +10,20 @@ let popup = null;
 export default class PopUp extends React.Component {
   constructor(props) {
     super(props);
-
     this.onClickHandler = this.onClickHandler.bind(this);
   }
-
   onClickHandler() {
     console.log("onClickHandler", this.props);
 
     const { url, name, opts } = this.props;
     if (popup && !popup.closed) {
       popup.focus();
-
       return;
     }
-
     popup = browser.open(url, name, opts);
-
     // if (timer === null) {
     //   timer = setInterval(watcher, 2000);
     // }
-
     return;
   }
 
@@ -38,7 +32,8 @@ export default class PopUp extends React.Component {
     return (
       <PopUpStyled key={this.prop} onClick={this.onClickHandler}>
         {children}
-        <Table></Table>
+        <Form></Form>
+        {/* <Table></Table> */}
       </PopUpStyled>
     );
   }
