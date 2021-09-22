@@ -8,4 +8,4 @@
 ![](images/table.jpg)
 
 3. Showed message in the console from input by click on the button and then this button also close the window:
-![](../images/console.jpg)
+![](././images/console.png)
