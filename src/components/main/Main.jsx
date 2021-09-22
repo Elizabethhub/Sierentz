@@ -16,7 +16,7 @@ export default class Main extends React.Component {
     return (
       <div>
         {/* <MainStyled onClick={window.open("http://localhost:3000/table")}> Welcome to our table!</MainStyled> */}
-        <MainStyled onClick={window.open("http://localhost:3000/table/", "hello", params)}>
+        <MainStyled onClick={() => window.open("http://localhost:3000/table/", "hello", params)}>
           Welcome to our table!
         </MainStyled>
       </div>

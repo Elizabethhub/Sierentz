@@ -15,19 +15,24 @@ export default class Table extends React.Component {
 
   updateMessage = (event) => {
     this.setState({
-      message: event.currentTarget.value,
+      message: event.target.value,
     });
   };
   handleClick = () => {
     let items = this.state.items;
-
     items.push(this.state.message);
-
     this.setState({
       items: items,
       message: "",
     });
   };
+
+  handleClose = () => {
+    this.handleClick();
+    console.log(`this.message`, this.state.message);
+    // window.close();
+  };
+
   handleItemChanged = (event) => {
     let items = this.state.items;
     items = event.currentTarget.value;
@@ -66,7 +71,7 @@ export default class Table extends React.Component {
           <tfoot>
             <tr>
               <td>
-                <input className="input" type="text" onChange={this.updateMessage} />{" "}
+                <input className="input" type="text" onChange={this.updateMessage} />
               </td>
               <td>
                 <select name="action" value={this.action} onChange={this.handleItemChanged}>
@@ -92,6 +97,9 @@ export default class Table extends React.Component {
             </tr>
           </tfoot>
         </table>
+        <button type="button" onClick={this.handleClose}>
+          Close
+        </button>
       </Styles>
     );
   }

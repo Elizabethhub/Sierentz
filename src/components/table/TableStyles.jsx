@@ -29,7 +29,17 @@ export const Styles = styled.div`
     background-color: #4caf50;
     color: white;
   }
-  .input {
-    width: 210px;
+
+  button {
+    font: inherit;
+    float: right;
+    padding: 10px;
+    margin-right: 20px;
+    margin-top: 20px;
+    background-color: #4caf50;
+    border-radius: 5px;
+    border-color: #4caf50;
+    color: white;
+    cursor: pointer;
   }
 `;
