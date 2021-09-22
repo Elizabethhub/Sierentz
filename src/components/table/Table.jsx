@@ -29,7 +29,7 @@ export default class Table extends React.Component {
 
   handleClose = () => {
     this.handleClick();
-    console.log(`this.message`, this.state.message);
+    console.log(this.state.message);
     window.close();
   };
 
