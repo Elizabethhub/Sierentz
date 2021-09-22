@@ -1,7 +1,7 @@
 # React App
 
 1. Home page:
-![](images/homePage.jpg)
+![homePage](https://github.com/Elizabethhub/sierentz/raw/main/images/homePage.jpg)
 
 
 2. Opened browser window by click on text with table:
