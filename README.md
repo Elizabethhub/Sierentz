@@ -3,6 +3,7 @@
 1. Home page:
 ![](images/homePage.jpg)
 
+
 2. Opened browser window by click on text with table:
 ![](images/table.jpg)
 
