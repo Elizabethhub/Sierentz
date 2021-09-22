@@ -7,7 +7,7 @@ import Table from "./components/table/Table";
 function App() {
   return (
     <Switch>
-      <Route path="/" component={Main} exact={false} />
+      <Route path="/" component={Main} exact={true} />
       <Route path="/table" component={Table} exact={true} />
       <Redirect from="*" to="/" />
     </Switch>
