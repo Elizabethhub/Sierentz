@@ -1,106 +1,131 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Styles } from "./TableStyles";
 import { tableData } from "../../data";
-const genders = ["male", "female"];
-const actions = ["take", "make"];
+import { validationSchema } from "../../validation/Validator";
 
-export default class Table extends React.Component {
-  state = {
-    message: "",
-    items: [],
-    names: [],
-    gender: genders[0],
-    action: actions[0],
+// let yup = require("yup");
+
+export const Table = () => {
+  const [value, setValue] = useState("");
+  const [date, setDate] = useState("");
+  const [user, setUser] = useState("");
+  const [comment, setComment] = useState("");
+  const [items, setItems] = useState([]);
+
+  const dataItem = { value, date, user, comment };
+  console.log(`dataItem`, dataItem);
+
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  let yyyy = today.getFullYear();
+
+  today = mm + "." + dd + "." + yyyy;
+  console.log(`today`, today);
+
+  const handleChange = (e) => {
+    console.log(`e`, e);
+    const { name, value } = e.target;
+    switch (name) {
+      case "value":
+        setValue(value);
+        break;
+      case "user":
+        setUser(value);
+        break;
+      case "date":
+        setDate(value);
+        break;
+      case "comment":
+        setComment(value);
+        break;
+      // no default
+    }
+  };
+  const handleAdd = (dataItem) => {
+    setItems((items) => ({ items: [...items, dataItem] }));
+    console.log(dataItem);
+
+    // window.close();
   };
 
-  updateMessage = (event) => {
-    this.setState({
-      message: event.target.value,
-    });
-  };
-  handleClick = () => {
-    let items = this.state.items;
-    items.push(this.state.message);
-    this.setState({
-      items: items,
-      message: "",
-    });
+  const handleCalculation = () => {
+    console.log(`calculation`);
+    window.resizeTo(500, 500);
   };
 
-  handleClose = () => {
-    this.handleClick();
-    console.log(this.state.message);
-    window.close();
-  };
-
-  handleItemChanged = (event) => {
-    let items = this.state.items;
-    items = event.currentTarget.value;
-
-    this.setState({
-      items: items,
-    });
-  };
-
-  renderRows = () => {
+  const RenderRows = ({ items }) => {
     // console.log(`this`, this);
-    return tableData.map((i, key) => {
+    return items.map((i, key) => {
       return (
         <tr key={key}>
-          <td>{i.item}</td>
-          <td>{i.action}</td>
-          <td>{i.name}</td>
-          <td>{i.gender}</td>
+          <td>{i.value}</td>
+          <td>{i.date}</td>
+          <td>{i.user}</td>
+          <td>{i.comment}</td>
         </tr>
       );
     });
   };
-  render() {
-    return (
-      <Styles>
+  useEffect(() => {
+    setItems(tableData);
+  }, []);
+  // const formik = useFormik({ validationSchema });
+  return (
+    <Styles validationSchema={validationSchema}>
+      <div className="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Actions</th>
-              <th>Name</th>
-              <th>Gender</th>
+              <th>Value</th>
+              <th>Date</th>
+              <th>User</th>
+              <th>Comment</th>
             </tr>
           </thead>
-          <tbody>{this.renderRows()}</tbody>
+          <tbody>
+            <RenderRows items={items} />
+          </tbody>
+
           <tfoot>
             <tr>
               <td>
-                <input className="input" type="text" onChange={this.updateMessage} />
+                <input name="value" value={value} className="input" type="text" onChange={handleChange} />
               </td>
               <td>
-                <select name="action" value={this.action} onChange={this.handleItemChanged}>
-                  {actions.map((action) => (
-                    <option value={action} key={action}>
-                      {action}
-                    </option>
-                  ))}
-                </select>
+                {user.login}
+
+                {today}
               </td>
+
+              <td>request user</td>
               <td>
-                <input className="input" type="text" onChange={this.updateMessage} />
-              </td>
-              <td>
-                <select name="gender" value={this.gender} onChange={this.handleItemChanged}>
-                  {genders.map((gender) => (
-                    <option value={gender} key={gender}>
-                      {gender}
-                    </option>
-                  ))}
-                </select>
+                <input
+                  className="input"
+                  name="comment"
+                  value={comment}
+                  type="text"
+                  onChange={handleChange}
+                  placeholder="*required"
+                  title="comment is required"
+                  required
+                />
               </td>
             </tr>
           </tfoot>
         </table>
-        <button type="button" onClick={this.handleClose}>
-          Close
+      </div>
+      <div className="button-wrapper">
+        <button type="button" onClick={handleCalculation}>
+          View
         </button>
-      </Styles>
-    );
-  }
-}
+        <button type="button" onClick={handleAdd}>
+          Add
+        </button>
+      </div>
+    </Styles>
+  );
+};
+
+export default Table;
