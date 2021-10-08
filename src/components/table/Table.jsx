@@ -56,7 +56,7 @@ export const Table = () => {
   };
 
   const RenderRows = ({ items }) => {
-    // console.log(`this`, this);
+    console.log(`items`, items);
     return items.map((i, key) => {
       return (
         <tr key={key}>
@@ -73,7 +73,9 @@ export const Table = () => {
   }, []);
   // const formik = useFormik({ validationSchema });
   return (
-    <Styles validationSchema={validationSchema}>
+    <Styles
+    // validationSchema={validationSchema}
+    >
       <div className="table-wrapper">
         <table>
           <thead>
