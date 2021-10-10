@@ -44,7 +44,10 @@ export const Table = () => {
     }
   };
   const handleAdd = (dataItem) => {
-    setItems((items) => ({ items: [...items, dataItem] }));
+    // setItems((items) => ({ items: [...items, dataItem] }));
+    setItems((prevItems) => [...prevItems, dataItem]);
+    console.log("dataItem", dataItem);
+
     console.log(dataItem);
 
     // window.close();
